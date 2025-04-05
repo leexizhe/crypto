@@ -2,12 +2,14 @@ package org.aquariux.crypto.service;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.List;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.aquariux.crypto.dto.TransactionsRequest;
 import org.aquariux.crypto.dto.TransactionsResponse;
 import org.aquariux.crypto.entity.AggregatedPrice;
 import org.aquariux.crypto.entity.Transactions;
+import org.aquariux.crypto.exception.ApplicationException;
 import org.aquariux.crypto.repository.PriceRepository;
 import org.aquariux.crypto.repository.TransactionsRepository;
 import org.springframework.stereotype.Service;
@@ -20,14 +22,27 @@ public class TransactionsServiceImpl implements TransactionsService {
     private final TransactionsRepository transactionsRepository;
 
     @Override
+    public List<TransactionsResponse> getUserTradeHistory(Long userId) {
+
+        List<Transactions> transactionsList = transactionsRepository.findByUserIdOrderByTimestampDesc(userId);
+        log.info("Transactions list size: {}", transactionsList.size());
+        return transactionsList.stream()
+                .map(transactions -> new TransactionsResponse(
+                        transactions.getCryptoPair(),
+                        transactions.getAmount(),
+                        transactions.getExecutionPrice(),
+                        transactions.getTradeType(),
+                        transactions.getTimestamp()))
+                .toList();
+    }
+
+    @Override
     public TransactionsResponse executeTrade(TransactionsRequest request) {
-        TransactionsResponse response = new TransactionsResponse();
         AggregatedPrice latestPrice =
                 priceRepository.findTopByCryptoPairOrderByLastUpdatedDesc(request.getCryptoPair());
 
         if (latestPrice == null) {
-            response.setMessage("No price data available for " + request.getCryptoPair());
-            return response;
+            throw new ApplicationException("No price data available for " + request.getCryptoPair());
         }
 
         BigDecimal executionPrice =
@@ -42,12 +57,11 @@ public class TransactionsServiceImpl implements TransactionsService {
                 LocalDateTime.now());
         transactionsRepository.save(transactions);
 
-        response.setCryptoPair(request.getCryptoPair());
-        response.setAmount(executionPrice);
-        response.setExecutionPrice(executionPrice);
-        response.setTradeType(request.getTradeType());
-        response.setMessage("SUCCESS");
-
-        return response;
+        return new TransactionsResponse(
+                transactions.getCryptoPair(),
+                transactions.getAmount(),
+                transactions.getExecutionPrice(),
+                transactions.getTradeType(),
+                transactions.getTimestamp());
     }
 }

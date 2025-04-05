@@ -11,8 +11,9 @@ import lombok.*;
 @Table(name = "transactions")
 public class Transactions {
     @Id
+    @Column(name = "transactions_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long transactionsId;
 
     private String cryptoPair;
     private BigDecimal amount;

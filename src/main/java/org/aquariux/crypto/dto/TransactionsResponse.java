@@ -1,13 +1,18 @@
 package org.aquariux.crypto.dto;
 
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class TransactionsResponse {
     private String cryptoPair;
     private BigDecimal amount;
     private BigDecimal executionPrice;
     private String tradeType;
-    private String message;
+    private LocalDateTime timestamp;
 }
