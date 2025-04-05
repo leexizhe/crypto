@@ -7,10 +7,11 @@ import java.time.LocalDateTime;
 import java.util.*;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.aquariux.crypto.dto.AggregatedPriceResponse;
 import org.aquariux.crypto.dto.BinanceResponse;
 import org.aquariux.crypto.dto.HuobiResponse;
 import org.aquariux.crypto.entity.AggregatedPrice;
-import org.aquariux.crypto.repository.AggregatedPriceRepository;
+import org.aquariux.crypto.repository.PriceRepository;
 import org.aquariux.crypto.utils.CryptoConfig;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
@@ -22,7 +23,7 @@ import org.springframework.web.client.RestTemplate;
 public class PriceAggregationServiceImpl implements PriceAggregationService {
 
     private final RestTemplate restTemplate = new RestTemplate();
-    private final AggregatedPriceRepository repository;
+    private final PriceRepository repository;
     private final CryptoConfig cryptoConfig;
 
     @Override
@@ -33,6 +34,16 @@ public class PriceAggregationServiceImpl implements PriceAggregationService {
 
         List<AggregatedPrice> aggregatedPrices = comparePrices(binancePrices, huobPrices);
         aggregatedPrices.stream().forEach(this::saveBestPrice);
+    }
+
+    @Override
+    public AggregatedPriceResponse getLatestPrice(String cryptoPair) {
+        AggregatedPrice aggregatedPrice = repository.findTopByCryptoPairOrderByLastUpdatedDesc(cryptoPair);
+        return new AggregatedPriceResponse(
+                aggregatedPrice.getCryptoPair(),
+                aggregatedPrice.getBidPrice(),
+                aggregatedPrice.getAskPrice(),
+                aggregatedPrice.getLastUpdated());
     }
 
     private List<AggregatedPrice> callBinance() {
