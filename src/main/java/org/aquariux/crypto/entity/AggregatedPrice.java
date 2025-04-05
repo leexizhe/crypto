@@ -3,16 +3,11 @@ package org.aquariux.crypto.entity;
 import jakarta.persistence.*;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 @Data
 @Entity
-@Builder
 @NoArgsConstructor
-@AllArgsConstructor
 @Table(name = "aggregated_prices")
 public class AggregatedPrice {
     @Id
@@ -23,4 +18,17 @@ public class AggregatedPrice {
     private BigDecimal bidPrice;
     private BigDecimal askPrice;
     private LocalDateTime lastUpdated;
+
+    public AggregatedPrice(String cryptoPair, BigDecimal bidPrice, BigDecimal askPrice) {
+        this.cryptoPair = cryptoPair;
+        this.bidPrice = bidPrice;
+        this.askPrice = askPrice;
+    }
+
+    public AggregatedPrice(String cryptoPair, BigDecimal bidPrice, BigDecimal askPrice, LocalDateTime lastUpdated) {
+        this.cryptoPair = cryptoPair;
+        this.bidPrice = bidPrice;
+        this.askPrice = askPrice;
+        this.lastUpdated = lastUpdated;
+    }
 }

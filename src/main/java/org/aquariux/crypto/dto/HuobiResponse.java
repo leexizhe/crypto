@@ -5,7 +5,7 @@ import lombok.Data;
 
 @Data
 public class HuobiResponse {
-    private List<CryptoTicker> data;
+    private List<HuobiTicker> data;
     private String status;
     private long timestamp;
 }

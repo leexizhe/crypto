@@ -3,13 +3,19 @@ spring:
     url: jdbc:h2:mem:testdb
     driver-class-name: org.h2.Driver
     username: sa
-    password: password
+    password:
   jpa:
     hibernate:
       ddl-auto: update
   h2:
     console:
       enabled: true
+
+crypto:
+  url:
+    binance: https://api.binance.com/api/v3/ticker/bookTicker
+    huobi: https://api.huobi.pro/market/tickers
+
 
 logging:
   level:

@@ -4,7 +4,7 @@ import java.math.BigDecimal;
 import lombok.Data;
 
 @Data
-public class CryptoTicker {
+public class HuobiTicker {
     private String symbol;
     private BigDecimal open;
     private BigDecimal high;
