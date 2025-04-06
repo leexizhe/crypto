@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Optional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.aquariux.crypto.dto.TradeType;
 import org.aquariux.crypto.dto.TransactionsRequest;
 import org.aquariux.crypto.dto.TransactionsResponse;
 import org.aquariux.crypto.entity.AggregatedPrice;
@@ -55,14 +56,14 @@ public class TransactionsServiceImpl implements TransactionsService {
         }
 
         BigDecimal executionPrice =
-                request.getTradeType().equals("BUY") ? latestPrice.getAskPrice() : latestPrice.getBidPrice();
+                (TradeType.BUY == request.getTradeType()) ? latestPrice.getAskPrice() : latestPrice.getBidPrice();
         BigDecimal cost = request.getQuantity().multiply(executionPrice);
 
         User user = userRepository
                 .findById(request.getUserId())
                 .orElseThrow(() -> new ApplicationException("User not found"));
 
-        if (request.getTradeType().equals("BUY")) {
+        if (TradeType.BUY == request.getTradeType()) {
             if (user.getWalletBalance().compareTo(cost) < 0) {
                 throw new ApplicationException("Insufficient wallet balance");
             }

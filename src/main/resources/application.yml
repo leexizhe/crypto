@@ -18,7 +18,7 @@ crypto:
   trackedPairs:
     - BTCUSDT
     - ETHUSDT
-    - ethbtc
+#    - ETHBTC
 
 
 logging:

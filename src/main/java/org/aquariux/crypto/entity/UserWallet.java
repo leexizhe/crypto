@@ -20,5 +20,5 @@ public class UserWallet {
     private BigDecimal quantity;
 
     @Column(nullable = false, updatable = false)
-    private LocalDateTime lastUpdated = LocalDateTime.now();
+    private LocalDateTime timestamp = LocalDateTime.now();
 }

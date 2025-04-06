@@ -32,6 +32,6 @@ CREATE TABLE user_wallet
     user_id      BIGINT         NOT NULL,
     crypto_pair  VARCHAR(20)    NOT NULL,
     quantity     DECIMAL(18, 8) NOT NULL,
-    last_updated TIMESTAMP,
+    timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     UNIQUE (user_id, crypto_pair)
 );

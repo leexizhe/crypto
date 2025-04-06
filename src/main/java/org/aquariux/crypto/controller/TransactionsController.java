@@ -1,14 +1,13 @@
 package org.aquariux.crypto.controller;
 
+import jakarta.validation.Valid;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.aquariux.crypto.dto.TransactionsRequest;
 import org.aquariux.crypto.dto.TransactionsResponse;
-import org.aquariux.crypto.exception.ApplicationException;
 import org.aquariux.crypto.service.TransactionsService;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -25,12 +24,7 @@ public class TransactionsController {
 
     @PostMapping("/trade")
     @ResponseStatus(HttpStatus.CREATED)
-    public TransactionsResponse executeTrade(@RequestBody TransactionsRequest request) {
+    public TransactionsResponse executeTrade(@Valid @RequestBody TransactionsRequest request) {
         return service.executeTrade(request);
-    }
-
-    @ExceptionHandler(ApplicationException.class)
-    public ResponseEntity<String> handlePriceNotFoundException(ApplicationException ex) {
-        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(ex.getMessage());
     }
 }

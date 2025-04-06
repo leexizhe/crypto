@@ -14,6 +14,6 @@ public class TransactionsResponse {
     private BigDecimal cost;
     private BigDecimal quantity;
     private BigDecimal executionPrice;
-    private String tradeType;
+    private TradeType tradeType;
     private LocalDateTime timestamp;
 }

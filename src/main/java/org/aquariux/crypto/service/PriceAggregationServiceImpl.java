@@ -24,7 +24,7 @@ public class PriceAggregationServiceImpl implements PriceAggregationService {
 
     @Override
     public AggregatedPriceResponse getLatestPrice(String cryptoPair) {
-        AggregatedPrice aggregatedPrice = repository.findTopByCryptoPairOrderByTimestampDesc(cryptoPair);
+        AggregatedPrice aggregatedPrice = repository.findTopByCryptoPairOrderByTimestampDesc(cryptoPair.toUpperCase());
         return new AggregatedPriceResponse(
                 aggregatedPrice.getCryptoPair(),
                 aggregatedPrice.getBidPrice(),

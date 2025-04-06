@@ -26,7 +26,7 @@ public class WalletServiceImpl implements WalletService {
         List<UserWallet> holdings = walletRepository.findByUserId(userId);
         List<Wallet> list = holdings.stream()
                 .map(userWallet ->
-                        new Wallet(userWallet.getCryptoPair(), userWallet.getQuantity(), userWallet.getLastUpdated()))
+                        new Wallet(userWallet.getCryptoPair(), userWallet.getQuantity(), userWallet.getTimestamp()))
                 .toList();
 
         return new WalletResponse(String.valueOf(user.getUserId()), user.getWalletBalance(), list);

@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import lombok.*;
+import org.aquariux.crypto.dto.TradeType;
 
 @Data
 @Entity
@@ -19,7 +20,10 @@ public class Transactions {
     private BigDecimal cost;
     private BigDecimal quantity;
     private BigDecimal executionPrice;
-    private String tradeType;
+
+    @Enumerated(EnumType.STRING)
+    private TradeType tradeType;
+
     private Long userId;
     private LocalDateTime timestamp;
 
@@ -28,7 +32,7 @@ public class Transactions {
             BigDecimal cost,
             BigDecimal quantity,
             BigDecimal executionPrice,
-            String tradeType,
+            TradeType tradeType,
             Long userId,
             LocalDateTime timestamp) {
         this.cryptoPair = cryptoPair;

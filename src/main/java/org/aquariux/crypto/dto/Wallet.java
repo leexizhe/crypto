@@ -13,5 +13,5 @@ public class Wallet {
 
     private String cryptoPair;
     private BigDecimal quantity;
-    private LocalDateTime lastUpdated;
+    private LocalDateTime timestamp;
 }
