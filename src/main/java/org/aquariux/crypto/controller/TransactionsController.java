@@ -23,7 +23,7 @@ public class TransactionsController {
         return service.getUserTradeHistory(userId);
     }
 
-    @PostMapping
+    @PostMapping("/trade")
     @ResponseStatus(HttpStatus.CREATED)
     public TransactionsResponse executeTrade(@RequestBody TransactionsRequest request) {
         return service.executeTrade(request);
