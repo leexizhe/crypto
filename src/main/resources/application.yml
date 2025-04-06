@@ -12,9 +12,13 @@ spring:
       enabled: true
 
 crypto:
-  url:
-    binance: https://api.binance.com/api/v3/ticker/bookTicker
-    huobi: https://api.huobi.pro/market/tickers
+  exchangeUrls:
+    binance: "https://api.binance.com/api/v3/ticker/bookTicker"
+    huobi: "https://api.huobi.pro/market/tickers"
+  trackedPairs:
+    - BTCUSDT
+    - ETHUSDT
+    - ethbtc
 
 
 logging:

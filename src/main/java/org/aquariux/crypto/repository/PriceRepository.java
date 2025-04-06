@@ -6,5 +6,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface PriceRepository extends JpaRepository<AggregatedPrice, Long> {
-    AggregatedPrice findTopByCryptoPairOrderByLastUpdatedDesc(String cryptoPair);
+    AggregatedPrice findTopByCryptoPairOrderByTimestampDesc(String cryptoPair);
 }

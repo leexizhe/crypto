@@ -1,17 +1,19 @@
 package org.aquariux.crypto.utils;
 
+import java.util.Map;
+import java.util.Set;
 import lombok.Getter;
 import lombok.Setter;
-import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
 @Getter
 @Setter
+@EnableConfigurationProperties
+@ConfigurationProperties(prefix = "crypto")
 public class CryptoConfig {
-    @Value("${crypto.url.binance}")
-    private String binanceUrl;
-
-    @Value("${crypto.url.huobi}")
-    private String huobiUrl;
+    private Map<String, String> exchangeUrls;
+    private Set<String> trackedPairs;
 }

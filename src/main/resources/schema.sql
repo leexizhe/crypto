@@ -7,11 +7,11 @@ CREATE TABLE users
 
 CREATE TABLE aggregated_prices
 (
-    id           BIGINT AUTO_INCREMENT PRIMARY KEY,
-    crypto_pair  VARCHAR(10)    NOT NULL,
-    bid_price    DECIMAL(18, 8) NOT NULL,
-    ask_price    DECIMAL(18, 8) NOT NULL,
-    last_updated TIMESTAMP
+    id          BIGINT AUTO_INCREMENT PRIMARY KEY,
+    crypto_pair VARCHAR(10)    NOT NULL,
+    bid_price   DECIMAL(18, 8) NOT NULL,
+    ask_price   DECIMAL(18, 8) NOT NULL,
+    timestamp   TIMESTAMP
 );
 
 CREATE TABLE transactions
@@ -32,6 +32,6 @@ CREATE TABLE user_wallet
     user_id      BIGINT         NOT NULL,
     crypto_pair  VARCHAR(20)    NOT NULL,
     quantity     DECIMAL(18, 8) NOT NULL,
-    last_updated TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    last_updated TIMESTAMP,
     UNIQUE (user_id, crypto_pair)
 );

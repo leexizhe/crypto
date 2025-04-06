@@ -1,5 +1,6 @@
 package org.aquariux.crypto.service;
 
+import jakarta.transaction.Transactional;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.List;
@@ -22,6 +23,7 @@ import org.springframework.stereotype.Service;
 @Service
 @Slf4j
 @RequiredArgsConstructor
+@Transactional
 public class TransactionsServiceImpl implements TransactionsService {
     private final PriceRepository priceRepository;
     private final TransactionsRepository transactionsRepository;
@@ -46,8 +48,7 @@ public class TransactionsServiceImpl implements TransactionsService {
 
     @Override
     public TransactionsResponse executeTrade(TransactionsRequest request) {
-        AggregatedPrice latestPrice =
-                priceRepository.findTopByCryptoPairOrderByLastUpdatedDesc(request.getCryptoPair());
+        AggregatedPrice latestPrice = priceRepository.findTopByCryptoPairOrderByTimestampDesc(request.getCryptoPair());
 
         if (latestPrice == null) {
             throw new ApplicationException("No price data available for " + request.getCryptoPair());

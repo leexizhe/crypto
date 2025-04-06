@@ -17,18 +17,11 @@ public class AggregatedPrice {
     private String cryptoPair;
     private BigDecimal bidPrice;
     private BigDecimal askPrice;
-    private LocalDateTime lastUpdated;
+    private LocalDateTime timestamp = LocalDateTime.now();
 
     public AggregatedPrice(String cryptoPair, BigDecimal bidPrice, BigDecimal askPrice) {
         this.cryptoPair = cryptoPair;
         this.bidPrice = bidPrice;
         this.askPrice = askPrice;
-    }
-
-    public AggregatedPrice(String cryptoPair, BigDecimal bidPrice, BigDecimal askPrice, LocalDateTime lastUpdated) {
-        this.cryptoPair = cryptoPair;
-        this.bidPrice = bidPrice;
-        this.askPrice = askPrice;
-        this.lastUpdated = lastUpdated;
     }
 }
