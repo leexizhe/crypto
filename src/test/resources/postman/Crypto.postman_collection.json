@@ -1,0 +1,429 @@
+{
+	"info": {
+		"_postman_id": "bd32f2a2-e5ae-4fee-aad3-81ac5100a3ef",
+		"name": "Crypto",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "43798795"
+	},
+	"item": [
+		{
+			"name": "huobi api",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://api.huobi.pro/market/tickers",
+					"protocol": "https",
+					"host": [
+						"api",
+						"huobi",
+						"pro"
+					],
+					"path": [
+						"market",
+						"tickers"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "binance api",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://api.binance.com/api/v3/ticker/bookTicker",
+					"protocol": "https",
+					"host": [
+						"api",
+						"binance",
+						"com"
+					],
+					"path": [
+						"api",
+						"v3",
+						"ticker",
+						"bookTicker"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "prices/BTCUSDT - 200",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/prices/BTCUSDT",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"prices",
+						"BTCUSDT"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "prices/ETHUSDT - 200",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/prices/ETHUSDT",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"prices",
+						"ETHUSDT"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "prices/ETHBTC - 404 - No price data available for ETHBTC",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/prices/ETHBTC",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"prices",
+						"ETHBTC"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "api/wallet/1 - 200",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/wallet/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"wallet",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "transactions/trade - 201 - BUY",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"cryptoPair\": \"BTCUSDT\",\r\n    \"quantity\": 0.5,\r\n    \"tradeType\": \"BUY\",\r\n    \"userId\": 1\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/transactions/trade",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"transactions",
+						"trade"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "transactions/trade - 201 - SELL",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"cryptoPair\": \"BTCUSDT\",\r\n    \"quantity\": 1,\r\n    \"tradeType\": \"SELL\",\r\n    \"userId\": 1\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/transactions/trade",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"transactions",
+						"trade"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "transactions/trade - 201 - SELL ALL ETHUSDT",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"cryptoPair\": \"ETHUSDT\",\r\n    \"quantity\": 2,\r\n    \"tradeType\": \"SELL\",\r\n    \"userId\": 1\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/transactions/trade",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"transactions",
+						"trade"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "transactions/trade - 404 - No wallet found for ETHUSDT",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"cryptoPair\": \"ETHUSDT\",\r\n    \"quantity\": 2,\r\n    \"tradeType\": \"SELL\",\r\n    \"userId\": 1\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/transactions/trade",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"transactions",
+						"trade"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "transactions/trade - 404 - Insufficient wallet balance",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"cryptoPair\": \"BTCUSDT\",\r\n    \"quantity\": 5,\r\n    \"tradeType\": \"BUY\",\r\n    \"userId\": 1\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/transactions/trade",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"transactions",
+						"trade"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "transactions/trade - 404 - Insufficient wallet quantity to sell",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"cryptoPair\": \"BTCUSDT\",\r\n    \"quantity\": 5,\r\n    \"tradeType\": \"SELL\",\r\n    \"userId\": 1\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/transactions/trade",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"transactions",
+						"trade"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "transactions/trade - 400 - \"error\": \"Invalid value provided. Accepted values: [BUY, SELL]\"",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"cryptoPair\": \"BTCUSDT\",\r\n    \"quantity\": 0.1,\r\n    \"tradeType\": \"BUY1\",\r\n    \"userId\": 1\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/transactions/trade",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"transactions",
+						"trade"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "transactions/trade - 400 - \"quantity\": \"must not be null\"",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"cryptoPair\": \"BTCUSDT\",\r\n    \"tradeType\": \"BUY\",\r\n    \"userId\": 1\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/transactions/trade",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"transactions",
+						"trade"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "transactions/trade - 400 - No price data available for BTCUSDT1",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"cryptoPair\": \"BTCUSDT1\",\r\n    \"quantity\": 0.1,\r\n    \"tradeType\": \"BUY\",\r\n    \"userId\": 1\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/transactions/trade",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"transactions",
+						"trade"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "api/transactions/1",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/transactions/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"transactions",
+						"1"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

@@ -7,6 +7,7 @@ import org.crypto.dto.AggregatedPriceResponse;
 import org.crypto.dto.BinanceResponse;
 import org.crypto.dto.HuobiResponse;
 import org.crypto.entity.AggregatedPrice;
+import org.crypto.exception.ApplicationException;
 import org.crypto.repository.PriceRepository;
 import org.crypto.utils.CryptoConfig;
 import org.springframework.scheduling.annotation.Scheduled;
@@ -25,6 +26,11 @@ public class PriceAggregationServiceImpl implements PriceAggregationService {
     @Override
     public AggregatedPriceResponse getLatestPrice(String cryptoPair) {
         AggregatedPrice aggregatedPrice = repository.findTopByCryptoPairOrderByTimestampDesc(cryptoPair.toUpperCase());
+
+        if (aggregatedPrice == null) {
+            throw new ApplicationException("No price data available for " + cryptoPair);
+        }
+
         return new AggregatedPriceResponse(
                 aggregatedPrice.getCryptoPair(),
                 aggregatedPrice.getBidPrice(),
