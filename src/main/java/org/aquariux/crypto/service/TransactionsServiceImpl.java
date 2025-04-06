@@ -29,7 +29,8 @@ public class TransactionsServiceImpl implements TransactionsService {
         return transactionsList.stream()
                 .map(transactions -> new TransactionsResponse(
                         transactions.getCryptoPair(),
-                        transactions.getAmount(),
+                        transactions.getCost(),
+                        transactions.getQuantity(),
                         transactions.getExecutionPrice(),
                         transactions.getTradeType(),
                         transactions.getTimestamp()))
@@ -47,10 +48,12 @@ public class TransactionsServiceImpl implements TransactionsService {
 
         BigDecimal executionPrice =
                 request.getTradeType().equals("BUY") ? latestPrice.getAskPrice() : latestPrice.getBidPrice();
+        BigDecimal cost = request.getQuantity().multiply(executionPrice);
 
         Transactions transactions = new Transactions(
                 request.getCryptoPair(),
-                request.getAmount(),
+                cost,
+                request.getQuantity(),
                 executionPrice,
                 request.getTradeType(),
                 request.getUserId(),
@@ -59,7 +62,8 @@ public class TransactionsServiceImpl implements TransactionsService {
 
         return new TransactionsResponse(
                 transactions.getCryptoPair(),
-                transactions.getAmount(),
+                transactions.getCost(),
+                transactions.getQuantity(),
                 transactions.getExecutionPrice(),
                 transactions.getTradeType(),
                 transactions.getTimestamp());

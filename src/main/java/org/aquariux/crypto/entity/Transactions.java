@@ -16,7 +16,8 @@ public class Transactions {
     private Long transactionsId;
 
     private String cryptoPair;
-    private BigDecimal amount;
+    private BigDecimal cost;
+    private BigDecimal quantity;
     private BigDecimal executionPrice;
     private String tradeType;
     private Long userId;
@@ -24,13 +25,15 @@ public class Transactions {
 
     public Transactions(
             String cryptoPair,
-            BigDecimal amount,
+            BigDecimal cost,
+            BigDecimal quantity,
             BigDecimal executionPrice,
             String tradeType,
             Long userId,
             LocalDateTime timestamp) {
         this.cryptoPair = cryptoPair;
-        this.amount = amount;
+        this.cost = cost;
+        this.quantity = quantity;
         this.executionPrice = executionPrice;
         this.tradeType = tradeType;
         this.userId = userId;

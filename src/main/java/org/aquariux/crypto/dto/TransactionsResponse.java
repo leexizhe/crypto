@@ -11,7 +11,8 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class TransactionsResponse {
     private String cryptoPair;
-    private BigDecimal amount;
+    private BigDecimal cost;
+    private BigDecimal quantity;
     private BigDecimal executionPrice;
     private String tradeType;
     private LocalDateTime timestamp;
