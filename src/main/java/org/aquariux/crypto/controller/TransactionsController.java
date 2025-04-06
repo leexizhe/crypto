@@ -25,7 +25,7 @@ public class TransactionsController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public TransactionsResponse getLatestPrice(@RequestBody TransactionsRequest request) {
+    public TransactionsResponse executeTrade(@RequestBody TransactionsRequest request) {
         return service.executeTrade(request);
     }
 
